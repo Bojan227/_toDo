@@ -10,9 +10,9 @@ function createTask(tit, date, prio){
     h1.textContent = tit;
     const right = document.createElement('div')
     right.classList.add('right')
-    // const h2 = document.createElement('h3');
-    // h2.classList.add('description')
-    // h2.textContent = desc;
+    const h2 = document.createElement('h3');
+    h2.classList.add('description')
+    h2.textContent = "Description"
     const h3 = document.createElement('h3');
     h3.classList.add('dueDate')
     h3.textContent = date;
@@ -24,7 +24,7 @@ function createTask(tit, date, prio){
     const h6 = document.createElement('h4')
     h6.textContent = 'trash'
 
-    right.append(h3, h4, h5, h6)
+    right.append(h2, h3, h4, h5, h6)
     const newToDo = document.createElement('div')
     newToDo.classList.add('to-do')
     newToDo.append(left, right)
