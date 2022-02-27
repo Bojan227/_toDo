@@ -30,9 +30,19 @@ function createTask(tit, date, prio){
     newToDo.append(left, right)
     return newToDo
 }
+function addNewTaskBtn(){
+    const newTask = document.createElement('div')
+    newTask.classList.add('new-task')
+    const newTaskBtn = document.createElement('button')
+    newTaskBtn.classList.add('addNewTask')
+    newTaskBtn.textContent = '+'
+    newTask.appendChild(newTaskBtn)
+    return newTask
+}
 function updateDisplay(array, content){
     array.map(arr =>{
-       content.appendChild(createTask(arr.title, arr.dueDate, arr.priority)) 
+       content.insertAdjacentElement('afterbegin', createTask(arr.title, arr.date, arr.prio))
     })
+    content.insertAdjacentElement('beforeend', addNewTaskBtn())
 }
 export {createTask, updateDisplay} 

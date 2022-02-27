@@ -6,6 +6,7 @@ import './style.css';
 import {createNewProject, appendNewProject} from './createNewProject';
 const navBar = document.querySelector('.nav-bar')
 const newProjectBtn = document.querySelector('.add')
+const mainContent = document.querySelector('.main-content')
 const myToDo = [
     {
         category: 'Work',
@@ -22,8 +23,8 @@ const myToDo = [
         priority: "high",
     },
     {
-        category: 'another',
-        title: "100 Reps",
+        category: 'Study',
+        title: "Do Homework",
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
@@ -43,17 +44,17 @@ const myToDo = [
         priority: "high",
     },
     {
-        category: 'Dumb',
-        title: "Baby",
+        category: 'Study',
+        title: "Do Exercise",
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
     },
 
 ]
-
+updateDisplay(myToDo, mainContent)
 navBar.addEventListener('click', (e)=>{
-    const mainContent = document.querySelector('.main-content')
+    
    const result = myToDo.filter(todo =>{
     if(e.target.dataset.category === undefined){return}
     if(todo.category.toLowerCase() === e.target.dataset.category || e.target.dataset.category === 'home'){

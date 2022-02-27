@@ -1,4 +1,4 @@
-const createToDo = (category, title, desc,dueDate, priority) => ({
+const createToDo = (category, title, desc, dueDate, priority) => ({
     category,
     title,
     desc,
