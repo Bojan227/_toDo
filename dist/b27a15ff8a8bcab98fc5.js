@@ -1,11 +1,12 @@
 
 
-import {updateDisplayedList} from './newElements';
+import {createTask, updateDisplayedList } from './newElements';
 // import createToDo from './createToDo';
 import './style.css';
 // import {createNewProject, appendNewProject} from './createNewProject';
 const navBar = document.querySelector('.nav-bar')
 
+const newProjectBtn = document.querySelector('.add')
 const mainContent = document.querySelector('.main-content')
 const myToDo = [
     {
@@ -14,7 +15,6 @@ const myToDo = [
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
-        id: 0,
     },
     {
         category: 'Gym',
@@ -22,7 +22,6 @@ const myToDo = [
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
-        id: 1,
     },
     {
         category: 'Study',
@@ -30,7 +29,6 @@ const myToDo = [
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
-        id: 2,
     },
     {
         category: 'Work',
@@ -38,7 +36,6 @@ const myToDo = [
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
-        id: 3,
     },
     {
         category: 'Work',
@@ -46,7 +43,6 @@ const myToDo = [
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
-        id: 4,
     },
     {
         category: 'Study',
@@ -54,7 +50,6 @@ const myToDo = [
         desc: "blah",
         dueDate: "27 Feb",
         priority: "high",
-        id: 5,
     },
 
 ]
@@ -62,7 +57,7 @@ updateDisplayedList(myToDo, mainContent)
 
 function filterTasks(arr, category){
     let result = arr.filter(task => {
-       
+        
         if(task.category.toLowerCase() === category || category === 'home'){
             mainContent.innerHTML = ''
             
@@ -75,24 +70,9 @@ function filterTasks(arr, category){
 }
 let category = 'home'
 navBar.addEventListener('click', (e)=>{
-   
+    console.log(e.target)
     category = e.target.dataset.category
-    if(category === undefined){return}
+    console.log(category)
     
    updateDisplayedList(filterTasks(myToDo, category), mainContent)
-})
-
-
-
-
-mainContent.addEventListener('click', (e)=>{
-   
-    if(e.target.className === 'remove'){
-        const index = myToDo.map(todo => todo.id).indexOf(parseInt(e.target.parentElement.parentElement.dataset.id))
-        myToDo.splice(index, 1)
-        console.log(myToDo)
-        updateDisplayedList(filterTasks(myToDo, category), mainContent)
-    }else if(e.target.className === 'addNewTask'){
-        
-    }
 })

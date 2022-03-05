@@ -60,7 +60,7 @@ body{
     resize: none;
 }
 
-.form-container{
+/* .form-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,7 +71,7 @@ body{
     right: 0;
     bottom: 0;
     text-align: center;
-}
+} */
 .form-content{
     padding: 35px;
     border: 2px solid black;
