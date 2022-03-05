@@ -11,8 +11,8 @@ function createTask(title, dueDate, description, priority, id){
     const right = document.createElement('div')
     right.classList.add('right')
     const h2 = document.createElement('button');
-    h2.classList.add('see-more')
-    h2.textContent = "See More"
+    h2.classList.add('details')
+    h2.textContent = "Details"
     const desc = document.createElement('h3')
     desc.classList.add('desc')
     desc.textContent = description

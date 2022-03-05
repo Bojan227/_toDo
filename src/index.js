@@ -1,12 +1,15 @@
-
-
 import {updateDisplayedList} from './newElements';
-// import createToDo from './createToDo';
+import createToDo from './createToDo';
 import './style.css';
 // import {createNewProject, appendNewProject} from './createNewProject';
-const navBar = document.querySelector('.nav-bar')
 
+const taskManager = (()=>{
+
+//global variables
+const navBar = document.querySelector('.nav-bar')
 const mainContent = document.querySelector('.main-content')
+let category = 'home'
+
 const myToDo = [
     {
         category: 'Work',
@@ -58,6 +61,7 @@ const myToDo = [
     },
 
 ]
+
 updateDisplayedList(myToDo, mainContent)
 
 function filterTasks(arr, category){
@@ -73,7 +77,6 @@ function filterTasks(arr, category){
     })
     return result
 }
-let category = 'home'
 navBar.addEventListener('click', (e)=>{
    
     category = e.target.dataset.category
@@ -81,9 +84,6 @@ navBar.addEventListener('click', (e)=>{
     
    updateDisplayedList(filterTasks(myToDo, category), mainContent)
 })
-
-
-
 
 mainContent.addEventListener('click', (e)=>{
    
@@ -93,6 +93,43 @@ mainContent.addEventListener('click', (e)=>{
         console.log(myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }else if(e.target.className === 'addNewTask'){
-        
+        const arrayOfIds = myToDo.map(todo => todo.id)
+        let lastUniqueId
+        if(arrayOfIds.length === 0){
+            lastUniqueId = -1
+        }else{
+            lastUniqueId = arrayOfIds[arrayOfIds.length - 1]
+        }
+        lastUniqueId++
+        const newTask = createToDo('Work', 'Verify 100 records', 'Verify them until 1pm', 'Mar 03', 'Medium', lastUniqueId)
+        myToDo.push(newTask)
+        updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }
 })
+})();
+
+const projectManager = (()=>{
+    const myProjectsArray = [
+        {
+            title: "gym",
+            id: 0,
+        },
+        {
+            title: "Study",
+            id: 1,
+        },
+        {
+            title: "work",
+            id: 2,
+        },
+
+    ]
+})
+
+
+
+
+
+
+
+
