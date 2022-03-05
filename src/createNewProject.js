@@ -3,19 +3,32 @@
      id,
  })
  function createNewProject(title, id){
-    let userInput = title.value.toLowerCase()
+    let userInput = title.toLowerCase()
     const listElement = document.createElement('li');
     const projectName = document.createElement('h3')
-    projectName.textContent =  title.value
+    const removeProject = document.createElement('button')
+    removeProject.classList.add('removeProject')
+    removeProject.textContent = 'X'
+    projectName.textContent =  title
     projectName.setAttribute('data-category', userInput)
     listElement.setAttribute('data-id', id)
-    listElement.appendChild(projectName)
+    listElement.append(projectName, removeProject)
     return listElement
 }
 
-function appendNewProject(elementToAppend){
-    const projectList = document.querySelector('.project-list')
-    projectList.insertAdjacentElement('beforeend', elementToAppend)
+
+function updateDisplayedProjects(array, content){
+    if(array.length === 0){
+        content.innerHtml = ''
+
+    }else{
+        
+        array.map(project => {
+            content.appendChild(createNewProject(project.title, project.id))
+        })
+    }
+    
+    
 }
 
-export {createNewProject, appendNewProject}
+export {createProject, updateDisplayedProjects}

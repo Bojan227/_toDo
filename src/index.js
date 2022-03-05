@@ -1,7 +1,7 @@
 import {updateDisplayedList} from './newElements';
 import createToDo from './createToDo';
 import './style.css';
-// import {createNewProject, appendNewProject} from './createNewProject';
+import {createProject, updateDisplayedProjects} from './createNewProject';
 
 const taskManager = (()=>{
 
@@ -109,6 +109,9 @@ mainContent.addEventListener('click', (e)=>{
 })();
 
 const projectManager = (()=>{
+    // global variables
+    const projectList = document.querySelector('.project-list')
+    const addNewProjectBtn = document.querySelector('.addNewProject')
     const myProjectsArray = [
         {
             title: "gym",
@@ -124,7 +127,46 @@ const projectManager = (()=>{
         },
 
     ]
-})
+    updateDisplayedProjects(myProjectsArray, projectList)
+
+    addNewProjectBtn.addEventListener('click', (e)=>{
+        projectList.innerHTML = ''
+        const arrayIds = myProjectsArray.map(project => project.id)
+        let uniqueId
+        
+        if(arrayIds.length === 0){
+            uniqueId = -1
+        }else{
+            uniqueId = arrayIds[arrayIds.length - 1]
+        } 
+        uniqueId++
+        
+        const newProject = createProject('Cook', uniqueId)
+        myProjectsArray.push(newProject)
+        console.log(myProjectsArray)
+        updateDisplayedProjects(myProjectsArray, projectList)
+    })
+    // projectList.addEventListener('click', (e)=>{
+        
+    //     if(e.target.className === 'addNewProject'){
+    //         projectList.innerHTML = ''
+    //         const arrayIds = myProjectsArray.map(project => project.id)
+    //         let uniqueId
+            
+    //         if(arrayIds.length === 0){
+    //             uniqueId = -1
+    //         }else{
+    //             uniqueId = arrayIds[arrayIds.length - 1]
+    //         } 
+    //         uniqueId++
+            
+    //         const newProject = createProject('Cook', uniqueId)
+    //         myProjectsArray.push(newProject)
+    //         console.log(myProjectsArray)
+    //         updateDisplayedProjects(myProjectsArray, projectList)
+    //     }
+    // })
+})();
 
 
 
