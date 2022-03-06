@@ -2,13 +2,14 @@ import {updateDisplayedList} from './newElements';
 import createToDo from './createToDo';
 import './style.css';
 import {createProject, updateDisplayedProjects} from './createNewProject';
+import  {seeDetailsCard, appendSeeDetailsCard} from './details'
 
 const taskManager = (()=>{
 
 //global variables
 const navBar = document.querySelector('.nav-bar')
 const mainContent = document.querySelector('.main-content')
-let category = 'home'
+let category = 'home';
 
 const myToDo = [
     {
@@ -40,7 +41,7 @@ const myToDo = [
         title: "Do sth...",
         desc: "blah",
         dueDate: "27 Feb",
-        priority: "high",
+        priority: "medium",
         id: 3,
     },
     {
@@ -77,36 +78,51 @@ function filterTasks(arr, category){
     })
     return result
 }
-navBar.addEventListener('click', (e)=>{
-   
-    category = e.target.dataset.category
-    if(category === undefined){return}
-    
-   updateDisplayedList(filterTasks(myToDo, category), mainContent)
-})
-
-mainContent.addEventListener('click', (e)=>{
-   
-    if(e.target.className === 'remove'){
-        const index = myToDo.map(todo => todo.id).indexOf(parseInt(e.target.parentElement.parentElement.dataset.id))
-        myToDo.splice(index, 1)
-        console.log(myToDo)
-        updateDisplayedList(filterTasks(myToDo, category), mainContent)
-    }else if(e.target.className === 'addNewTask'){
-        const arrayOfIds = myToDo.map(todo => todo.id)
+function getIndex(array, elementId){
+    const index = array.map(arr => arr.id).indexOf(parseInt(elementId))
+    return parseInt(index)
+}
+function getUniqueId(array){
+    const arrayOfIds = array.map(arr => arr.id)
         let lastUniqueId
         if(arrayOfIds.length === 0){
             lastUniqueId = -1
         }else{
             lastUniqueId = arrayOfIds[arrayOfIds.length - 1]
         }
-        lastUniqueId++
-        const newTask = createToDo('Work', 'Verify 100 records', 'Verify them until 1pm', 'Mar 03', 'Medium', lastUniqueId)
-        myToDo.push(newTask)
+         lastUniqueId++
+         return lastUniqueId
+}
+navBar.addEventListener('click', (e)=>{
+   
+    
+    if(!e.target.dataset.category){return}
+    if(category === undefined){return}
+    category = e.target.dataset.category
+   updateDisplayedList(filterTasks(myToDo, category), mainContent)
+})
+
+mainContent.addEventListener('click', (e)=>{
+    let elementId = e.target.parentElement.parentElement.dataset.id
+    if(e.target.className === 'remove'){
+        myToDo.splice(getIndex(myToDo, elementId), 1)
+        console.log(myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
+    }else if(e.target.className === 'addNewTask'){
+        
+        const newTask = createToDo('Work', 'Verify 100 records', 'Verify them until 1pm', 'Mar 03', 'Medium', getUniqueId(myToDo))
+        myToDo.push(newTask)
+        
+        updateDisplayedList(filterTasks(myToDo, category), mainContent)
+    }else if(e.target.className === 'details'){
+        
+        appendSeeDetailsCard(seeDetailsCard(myToDo[getIndex(myToDo, elementId)].title, myToDo[getIndex(myToDo, elementId)].dueDate, myToDo[getIndex(myToDo, elementId)].desc))
     }
 })
+return {getUniqueId}
+
 })();
+
 
 const projectManager = (()=>{
     // global variables
@@ -131,19 +147,8 @@ const projectManager = (()=>{
 
     addNewProjectBtn.addEventListener('click', (e)=>{
         projectList.innerHTML = ''
-        const arrayIds = myProjectsArray.map(project => project.id)
-        let uniqueId
-        
-        if(arrayIds.length === 0){
-            uniqueId = -1
-        }else{
-            uniqueId = arrayIds[arrayIds.length - 1]
-        } 
-        uniqueId++
-        
-        const newProject = createProject('Cook', uniqueId)
+        const newProject = createProject('Cook', taskManager.getUniqueId(myProjectsArray))
         myProjectsArray.push(newProject)
-        console.log(myProjectsArray)
         updateDisplayedProjects(myProjectsArray, projectList)
     })
     // projectList.addEventListener('click', (e)=>{

@@ -1,18 +1,23 @@
 function createTask(title, dueDate, description, priority, id){
     const left = document.createElement('div')
     left.classList.add('left')
+
     const checkbox = document.createElement('input')
     checkbox.type = 'checkbox'
     checkbox.classList.add('cbox')
+
     const h1 = document.createElement('h3');
     h1.classList.add('title')
     left.append(checkbox, h1)
     h1.textContent = title;
+
     const right = document.createElement('div')
     right.classList.add('right')
+
     const h2 = document.createElement('button');
     h2.classList.add('details')
     h2.textContent = "Details"
+
     const desc = document.createElement('h3')
     desc.classList.add('desc')
     desc.textContent = description
@@ -20,21 +25,33 @@ function createTask(title, dueDate, description, priority, id){
     const h3 = document.createElement('h3');
     h3.classList.add('dueDate')
     h3.textContent = dueDate;
-    const h4 = document.createElement('h3');
-    h4.classList.add('priority')
-    h4.textContent = priority
+
+   
+    
     const h5 = document.createElement('button')
     h5.textContent = 'edit'
     const h6 = document.createElement('h4')
     h6.classList.add('remove')
     h6.textContent = 'trash'
 
-    right.append(h2, desc, h3, h4, h5, h6)
+    right.append(h2, desc, h3, h5, h6)
     const newToDo = document.createElement('div')
     newToDo.classList.add('to-do')
+    setPriorityColour(priority, newToDo)
     newToDo.setAttribute('data-id', id)
     newToDo.append(left, right)
     return newToDo
+}
+function setPriorityColour(priority, element){
+    let prio = priority.toLowerCase()
+    if(prio === 'high'){
+        element.classList.add('priority-high')
+    }else if(prio === 'medium'){
+        element.classList.add('priority-medium')
+    }else {
+        element.classList.add('priority-low')
+    }
+
 }
 function addNewTaskBtn(){
     const newTask = document.createElement('div')

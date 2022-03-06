@@ -86,3 +86,12 @@ form>*{
 .newTaskTitle{
     color: blue;
 }
+.priority-high{
+    border-inline: 3px solid red ;
+}
+.priority-medium{
+    border-inline: 3px solid orange; 
+}
+.priority.low{
+    border-inline: 3px solid green; 
+}
