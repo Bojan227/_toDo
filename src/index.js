@@ -119,7 +119,7 @@ mainContent.addEventListener('click', (e)=>{
         appendSeeDetailsCard(seeDetailsCard(myToDo[getIndex(myToDo, elementId)].title, myToDo[getIndex(myToDo, elementId)].dueDate, myToDo[getIndex(myToDo, elementId)].desc))
     }
 })
-return {getUniqueId}
+return {getUniqueId, getIndex}
 
 })();
 
@@ -151,26 +151,17 @@ const projectManager = (()=>{
         myProjectsArray.push(newProject)
         updateDisplayedProjects(myProjectsArray, projectList)
     })
-    // projectList.addEventListener('click', (e)=>{
+    projectList.addEventListener('click', (e)=>{
+        let elementId = e.target.parentElement.dataset.id
         
-    //     if(e.target.className === 'addNewProject'){
-    //         projectList.innerHTML = ''
-    //         const arrayIds = myProjectsArray.map(project => project.id)
-    //         let uniqueId
-            
-    //         if(arrayIds.length === 0){
-    //             uniqueId = -1
-    //         }else{
-    //             uniqueId = arrayIds[arrayIds.length - 1]
-    //         } 
-    //         uniqueId++
-            
-    //         const newProject = createProject('Cook', uniqueId)
-    //         myProjectsArray.push(newProject)
-    //         console.log(myProjectsArray)
-    //         updateDisplayedProjects(myProjectsArray, projectList)
-    //     }
-    // })
+        
+        if(e.target.className === 'removeProject'){
+            myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1)
+            projectList.innerHTML = ''
+            updateDisplayedProjects(myProjectsArray, projectList)
+        }
+        
+    })
 })();
 
 
