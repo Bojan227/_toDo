@@ -30,6 +30,7 @@ function createTask(title, dueDate, description, priority, id){
     
     const h5 = document.createElement('button')
     h5.textContent = 'edit'
+    h5.classList.add('edit')
     const h6 = document.createElement('h4')
     h6.classList.add('remove')
     h6.textContent = 'trash'

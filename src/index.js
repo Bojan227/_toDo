@@ -10,6 +10,7 @@ const taskManager = (()=>{
 const navBar = document.querySelector('.nav-bar')
 const mainContent = document.querySelector('.main-content')
 let category = 'home';
+let elementId
 
 const myToDo = [
     {
@@ -65,6 +66,13 @@ const myToDo = [
 
 updateDisplayedList(myToDo, mainContent)
 
+function editTask(a, b, c, d){
+    myToDo[getIndex(myToDo, elementId)].title = a
+    myToDo[getIndex(myToDo, elementId)].dueDate = b
+    myToDo[getIndex(myToDo, elementId)].priority = c
+    myToDo[getIndex(myToDo, elementId)].desc = d
+
+}
 function filterTasks(arr, category){
     let result = arr.filter(task => {
        
@@ -103,7 +111,8 @@ navBar.addEventListener('click', (e)=>{
 })
 
 mainContent.addEventListener('click', (e)=>{
-    let elementId = e.target.parentElement.parentElement.dataset.id
+    elementId = e.target.parentElement.parentElement.dataset.id
+    console.log(elementId)
     if(e.target.className === 'remove'){
         myToDo.splice(getIndex(myToDo, elementId), 1)
         console.log(myToDo)
@@ -117,6 +126,10 @@ mainContent.addEventListener('click', (e)=>{
     }else if(e.target.className === 'details'){
         
         appendSeeDetailsCard(seeDetailsCard(myToDo[getIndex(myToDo, elementId)].title, myToDo[getIndex(myToDo, elementId)].dueDate, myToDo[getIndex(myToDo, elementId)].desc))
+    }else if(e.target.className === 'edit'){
+        console.log( myToDo[getIndex(myToDo, elementId)].dueDate)
+        editTask('Do shit', '20 Mar', 'medium', 'anything')
+        updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }
 })
 return {getUniqueId, getIndex}
@@ -156,14 +169,13 @@ const projectManager = (()=>{
         
         
         if(e.target.className === 'removeProject'){
-            myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1)
+            myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1) 
             projectList.innerHTML = ''
             updateDisplayedProjects(myProjectsArray, projectList)
         }
         
     })
 })();
-
 
 
 
