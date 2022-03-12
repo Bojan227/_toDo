@@ -73,6 +73,11 @@ function editTask(a, b, c, d){
     myToDo[getIndex(myToDo, elementId)].desc = d
 
 }
+function markAsComplete(a, style1, style2){
+    a.style.textDecoration = style1
+    a.style.backgroundColor = style2
+}
+
 function filterTasks(arr, category){
     let result = arr.filter(task => {
        
@@ -127,9 +132,16 @@ mainContent.addEventListener('click', (e)=>{
         
         appendSeeDetailsCard(seeDetailsCard(myToDo[getIndex(myToDo, elementId)].title, myToDo[getIndex(myToDo, elementId)].dueDate, myToDo[getIndex(myToDo, elementId)].desc))
     }else if(e.target.className === 'edit'){
-        console.log( myToDo[getIndex(myToDo, elementId)].dueDate)
+        
         editTask('Do shit', '20 Mar', 'medium', 'anything')
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
+    }else if(e.target.className === 'cbox'){
+        if(e.target.checked){
+            markAsComplete(e.target.parentElement.parentElement, 'line-through', 'lightgreen')
+        }
+        if(!e.target.checked){
+            markAsComplete(e.target.parentElement.parentElement, 'none', 'white')
+        }
     }
 })
 return {getUniqueId, getIndex}
