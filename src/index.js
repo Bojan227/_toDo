@@ -1,15 +1,18 @@
 import {updateDisplayedList} from './newElements';
-import createToDo from './createToDo';
+import {createToDo, getUniqueId, createNewTask} from './createToDo';
 import './style.css';
 import {createProject, updateDisplayedProjects} from './createNewProject';
 import  {seeDetailsCard, appendSeeDetailsCard} from './details'
 import {saveToStorage, getFromStorage} from './localStorage';
+import format from 'date-fns/format';
 
 const taskManager = (()=>{
 
 //global variables
 const navBar = document.querySelector('.nav-bar')
 const mainContent = document.querySelector('.main-content')
+const submitTaskBtn = document.querySelector(".submit");
+const newTaskForm = document.querySelector('.form-container')
 let category = 'home';
 let elementId
 
@@ -66,7 +69,7 @@ let myToDo = [
 ]
 myToDo = getFromStorage('myTask')
 updateDisplayedList(myToDo, mainContent)
-
+setTodaysDate()
 function editTask(a, b, c, d){
     myToDo[getIndex(myToDo, elementId)].title = a
     myToDo[getIndex(myToDo, elementId)].dueDate = b
@@ -78,7 +81,10 @@ function markAsComplete(a, style1, style2){
     a.style.textDecoration = style1
     a.style.backgroundColor = style2
 }
-
+function setTodaysDate(){
+    const today = document.querySelector("h1[data-category = 'today']")
+    today.setAttribute('data-date', format(new Date(), 'MM/dd/yyyy') )
+}
 function filterTasks(arr, category){
     let result = arr.filter(task => {
         if(task.category.toLowerCase() === category || category === 'home'){
@@ -92,21 +98,13 @@ function getIndex(array, elementId){
     const index = array.map(arr => arr.id).indexOf(parseInt(elementId))
     return parseInt(index)
 }
-function getUniqueId(array){
-    const arrayOfIds = array.map(arr => arr.id)
-        let lastUniqueId
-        if(arrayOfIds.length === 0){
-            lastUniqueId = -1
-        }else{
-            lastUniqueId = arrayOfIds[arrayOfIds.length - 1]
-        }
-         lastUniqueId++
-         return lastUniqueId
-}
+
 navBar.addEventListener('click', (e)=>{
     if(!e.target.dataset.category){return}
     if(category === undefined){return}
     category = e.target.dataset.category
+    let date = e.target.dataset.date
+    console.log(date)
    updateDisplayedList(filterTasks(myToDo, category), mainContent)
 })
 
@@ -115,21 +113,19 @@ mainContent.addEventListener('click', (e)=>{
     elementId = e.target.parentElement.parentElement.dataset.id
     if(e.target.className === 'remove'){
         myToDo.splice(getIndex(myToDo, elementId), 1)
-        saveToStorage('myTask', myToDo)
+        // saveToStorage('myTask', myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }else if(e.target.className === 'addNewTask'){
-        console.log('lol')
-        const newTask = createToDo('Work', 'Verify 100 records', 'Verify them until 1pm', 'Mar 03', 'Medium', getUniqueId(myToDo))
-        myToDo.push(newTask)
-        saveToStorage('myTask', myToDo)
-        updateDisplayedList(filterTasks(myToDo, category), mainContent)
+        
+        newTaskForm.classList.remove('none') 
+        
     }else if(e.target.className === 'details'){
         
         appendSeeDetailsCard(seeDetailsCard(myToDo[getIndex(myToDo, elementId)].title, myToDo[getIndex(myToDo, elementId)].dueDate, myToDo[getIndex(myToDo, elementId)].desc))
     }else if(e.target.className === 'edit'){
         
         editTask('Do shit', '20 Mar', 'medium', 'anything')
-        saveToStorage('myTask', myToDo)
+        // saveToStorage('myTask', myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }else if(e.target.className === 'cbox'){
         if(e.target.checked){
@@ -140,14 +136,21 @@ mainContent.addEventListener('click', (e)=>{
         }
     }
 })
-return {getUniqueId, getIndex, myToDo}
+submitTaskBtn.addEventListener('click', ()=>{
+        myToDo.push(createNewTask(myToDo))
+        // saveToStorage('myTask', myToDo)
+        updateDisplayedList(filterTasks(myToDo, category), mainContent)
+        newTaskForm.classList.add('none')
+})
+return {getIndex}
 
 })();
 
-console.log(taskManager.myToDo)
+
 const projectManager = (()=>{
     // global variables
     const projectList = document.querySelector('.project-list')
+    const categoryDropDown = document.querySelector("select[name = 'category']");
     const addNewProjectBtn = document.querySelector('.addNewProject')
     let myProjectsArray = [
         {
@@ -165,14 +168,15 @@ const projectManager = (()=>{
 
     ]
     myProjectsArray = getFromStorage('myProject')
-    updateDisplayedProjects(myProjectsArray, projectList)
+    updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown)
 
     addNewProjectBtn.addEventListener('click', (e)=>{
         projectList.innerHTML = ''
-        const newProject = createProject('Cook', taskManager.getUniqueId(myProjectsArray))
+        categoryDropDown.innerHTML = ''
+        const newProject = createProject('Cook', getUniqueId(myProjectsArray))
         myProjectsArray.push(newProject)
         saveToStorage('myProject', myProjectsArray)
-        updateDisplayedProjects(myProjectsArray, projectList)
+        updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown)
     })
     projectList.addEventListener('click', (e)=>{
         let elementId = e.target.parentElement.dataset.id
@@ -182,7 +186,8 @@ const projectManager = (()=>{
             myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1)
             saveToStorage('myProject', myProjectsArray) 
             projectList.innerHTML = ''
-            updateDisplayedProjects(myProjectsArray, projectList)
+            categoryDropDown.innerHTML = ''
+            updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown)
         }
         
     })
@@ -193,4 +198,4 @@ const projectManager = (()=>{
 
 
 
-
+const dateInput = document.getElementById('date')

@@ -40,6 +40,7 @@ function createTask(title, dueDate, description, priority, id){
     newToDo.classList.add('to-do')
     setPriorityColour(priority, newToDo)
     newToDo.setAttribute('data-id', id)
+    newToDo.setAttribute('data-date', dueDate)
     newToDo.append(left, right)
     return newToDo
 }

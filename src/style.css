@@ -53,14 +53,12 @@ body{
     gap: 15px;
     padding: 5px;
 } 
-.none{
-    display: none;
-}
+
 #description{
     resize: none;
 }
 
-/* .form-container{
+.form-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,10 +69,13 @@ body{
     right: 0;
     bottom: 0;
     text-align: center;
-} */
+    background-color: lightblue;
+    padding: 20px;
+}
 .form-content{
     padding: 35px;
     border: 2px solid black;
+    border-radius: 10px;
     
 }
 form>*{
@@ -82,6 +83,9 @@ form>*{
    width: 100%;
    margin-bottom: 5px;
    
+}
+.none{
+    display: none;
 }
 .newTaskTitle{
     color: blue;

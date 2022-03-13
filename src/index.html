@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <!-- <div class="form-container">
+    <div class="form-container none">
 
         <div class="form-content">
             <h1 class='newTaskTitle'>New Task</h1>
-            <form action="#" method="post">
+            <form>
                 <label for="title">Task name:</label>
                 <input type="text" id='title' name='task_name' required>
 
@@ -22,24 +22,31 @@
                 <input type="date" id='dueDate' name='due_date' required>
 
                 <label for="priority">Priority</label>
-                <select name="priority">
-                    <option value="mercedes" id='priority' required>High</option>
-                    <option value="mercedes" id='priority' required>Medium</option>
-                    <option value="mercedes" id='priority' required>Low</option>
+                <select id='priority' name="priority">
+                    <option value='High' id='priority' required selected>High</option>
+                    <option value="Medium" id='priority' required>Medium</option>
+                    <option value='Low' id='priority' required>Low</option>
+
+                </select>
+                <label for="category">Category</label>
+                <select id='category' name="category">
+
 
                 </select>
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="30" rows="10"></textarea>
 
-                <button type="submit">Submit</button>
+
 
             </form>
+            <button class='submit'>Submit</button>
         </div>
 
-    </div> -->
+    </div>
     <div class="seeDetails">
 
     </div>
+
     <div id="content">
         <!-- <button class="save">Save</button> -->
 
@@ -81,7 +88,7 @@
 
 
     </div>
-
+    <input type="date" name="date" id="date">
     <script src="./index.js"></script>
 </body>
 

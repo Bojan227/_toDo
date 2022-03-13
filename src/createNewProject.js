@@ -15,16 +15,24 @@
     listElement.append(projectName, removeProject)
     return listElement
 }
+function createDropDownOption(title){
+    const option = document.createElement('option')
+    option.id = 'category'
+    option.textContent = title
+    option.value = title
+    return option
+}
 
 
-function updateDisplayedProjects(array, content){
+function updateDisplayedProjects(array, content, dropdown){
     if(array.length === 0){
         content.innerHtml = ''
-
+        dropdown.innerHtml = ''
     }else{
         
         array.map(project => {
             content.appendChild(createNewProject(project.title, project.id))
+            dropdown.appendChild(createDropDownOption(project.title))
         })
     }
     
