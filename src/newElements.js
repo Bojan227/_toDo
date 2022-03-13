@@ -1,3 +1,4 @@
+import format from 'date-fns/format';
 function createTask(title, dueDate, description, priority, id){
     const left = document.createElement('div')
     left.classList.add('left')
@@ -24,7 +25,7 @@ function createTask(title, dueDate, description, priority, id){
     
     const h3 = document.createElement('h3');
     h3.classList.add('dueDate')
-    h3.textContent = dueDate;
+    h3.textContent = format(new Date(dueDate), "d MMM");
 
    
     

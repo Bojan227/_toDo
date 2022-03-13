@@ -96,6 +96,6 @@ form>*{
 .priority-medium{
     border-inline: 3px solid orange; 
 }
-.priority.low{
+.priority-low{
     border-inline: 3px solid green; 
 }

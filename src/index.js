@@ -83,7 +83,7 @@ function markAsComplete(a, style1, style2){
 }
 function setTodaysDate(){
     const today = document.querySelector("h1[data-category = 'today']")
-    today.setAttribute('data-date', format(new Date(), 'MM/dd/yyyy') )
+    today.setAttribute('data-category', format(new Date(), 'MM/dd/yyyy') )
 }
 function filterTasks(arr, category){
     let result = arr.filter(task => {
@@ -91,6 +91,11 @@ function filterTasks(arr, category){
             mainContent.innerHTML = ''
             return task
         }
+        if(task.dueDate === category){
+            mainContent.innerHTML = ''
+            return task
+        }
+        
     })
     return result
 }
@@ -103,8 +108,7 @@ navBar.addEventListener('click', (e)=>{
     if(!e.target.dataset.category){return}
     if(category === undefined){return}
     category = e.target.dataset.category
-    let date = e.target.dataset.date
-    console.log(date)
+    
    updateDisplayedList(filterTasks(myToDo, category), mainContent)
 })
 
