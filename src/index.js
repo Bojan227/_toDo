@@ -3,6 +3,7 @@ import createToDo from './createToDo';
 import './style.css';
 import {createProject, updateDisplayedProjects} from './createNewProject';
 import  {seeDetailsCard, appendSeeDetailsCard} from './details'
+import {saveToStorage, getFromStorage} from './localStorage';
 
 const taskManager = (()=>{
 
@@ -12,7 +13,7 @@ const mainContent = document.querySelector('.main-content')
 let category = 'home';
 let elementId
 
-const myToDo = [
+let myToDo = [
     {
         category: 'Work',
         title: "Make app",
@@ -63,7 +64,7 @@ const myToDo = [
     },
 
 ]
-
+myToDo = getFromStorage('myTask')
 updateDisplayedList(myToDo, mainContent)
 
 function editTask(a, b, c, d){
@@ -80,14 +81,10 @@ function markAsComplete(a, style1, style2){
 
 function filterTasks(arr, category){
     let result = arr.filter(task => {
-       
         if(task.category.toLowerCase() === category || category === 'home'){
             mainContent.innerHTML = ''
-            
             return task
         }
-       
-        
     })
     return result
 }
@@ -107,26 +104,24 @@ function getUniqueId(array){
          return lastUniqueId
 }
 navBar.addEventListener('click', (e)=>{
-   
-    
     if(!e.target.dataset.category){return}
     if(category === undefined){return}
     category = e.target.dataset.category
    updateDisplayedList(filterTasks(myToDo, category), mainContent)
 })
 
+
 mainContent.addEventListener('click', (e)=>{
     elementId = e.target.parentElement.parentElement.dataset.id
-    console.log(elementId)
     if(e.target.className === 'remove'){
         myToDo.splice(getIndex(myToDo, elementId), 1)
-        console.log(myToDo)
+        saveToStorage('myTask', myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }else if(e.target.className === 'addNewTask'){
-        
+        console.log('lol')
         const newTask = createToDo('Work', 'Verify 100 records', 'Verify them until 1pm', 'Mar 03', 'Medium', getUniqueId(myToDo))
         myToDo.push(newTask)
-        
+        saveToStorage('myTask', myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }else if(e.target.className === 'details'){
         
@@ -134,6 +129,7 @@ mainContent.addEventListener('click', (e)=>{
     }else if(e.target.className === 'edit'){
         
         editTask('Do shit', '20 Mar', 'medium', 'anything')
+        saveToStorage('myTask', myToDo)
         updateDisplayedList(filterTasks(myToDo, category), mainContent)
     }else if(e.target.className === 'cbox'){
         if(e.target.checked){
@@ -144,16 +140,16 @@ mainContent.addEventListener('click', (e)=>{
         }
     }
 })
-return {getUniqueId, getIndex}
+return {getUniqueId, getIndex, myToDo}
 
 })();
 
-
+console.log(taskManager.myToDo)
 const projectManager = (()=>{
     // global variables
     const projectList = document.querySelector('.project-list')
     const addNewProjectBtn = document.querySelector('.addNewProject')
-    const myProjectsArray = [
+    let myProjectsArray = [
         {
             title: "gym",
             id: 0,
@@ -168,12 +164,14 @@ const projectManager = (()=>{
         },
 
     ]
+    myProjectsArray = getFromStorage('myProject')
     updateDisplayedProjects(myProjectsArray, projectList)
 
     addNewProjectBtn.addEventListener('click', (e)=>{
         projectList.innerHTML = ''
         const newProject = createProject('Cook', taskManager.getUniqueId(myProjectsArray))
         myProjectsArray.push(newProject)
+        saveToStorage('myProject', myProjectsArray)
         updateDisplayedProjects(myProjectsArray, projectList)
     })
     projectList.addEventListener('click', (e)=>{
@@ -181,7 +179,8 @@ const projectManager = (()=>{
         
         
         if(e.target.className === 'removeProject'){
-            myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1) 
+            myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1)
+            saveToStorage('myProject', myProjectsArray) 
             projectList.innerHTML = ''
             updateDisplayedProjects(myProjectsArray, projectList)
         }
