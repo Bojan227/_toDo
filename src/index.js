@@ -5,6 +5,7 @@ import {createProject, updateDisplayedProjects} from './createNewProject';
 import  {seeDetailsCard, appendSeeDetailsCard} from './details'
 import {saveToStorage, getFromStorage} from './localStorage';
 import format from 'date-fns/format';
+import isThisWeek from 'date-fns/isThisWeek'
 
 const taskManager = (()=>{
 
@@ -95,6 +96,12 @@ function filterTasks(arr, category){
             mainContent.innerHTML = ''
             return task
         }
+        if(category === 'week'){
+            if(isThisWeek(new Date(task.dueDate), { weekStartsOn: 1 })){
+                mainContent.innerHTML = ''
+                return task
+            }
+        }
         
     })
     return result
@@ -108,7 +115,7 @@ navBar.addEventListener('click', (e)=>{
     if(!e.target.dataset.category){return}
     if(category === undefined){return}
     category = e.target.dataset.category
-    
+    console.log(category)
    updateDisplayedList(filterTasks(myToDo, category), mainContent)
 })
 
