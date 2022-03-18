@@ -1,4 +1,17 @@
 import format from 'date-fns/format';
+import capitalizeFirstLetter from './capitalize';
+
+function setPriorityColour(priority, element){
+    const prio = priority.toLowerCase()
+    if(prio === 'high'){
+        element.classList.add('priority-high')
+    }else if(prio === 'medium'){
+        element.classList.add('priority-medium')
+    }else {
+        element.classList.add('priority-low')
+    }
+
+}
 function createTask(title, dueDate, description, priority, id){
     const left = document.createElement('div')
     left.classList.add('left')
@@ -10,7 +23,7 @@ function createTask(title, dueDate, description, priority, id){
     const h1 = document.createElement('h3');
     h1.classList.add('title')
     left.append(checkbox, h1)
-    h1.textContent = title;
+    h1.textContent = capitalizeFirstLetter(title);
 
     const right = document.createElement('div')
     right.classList.add('right')
@@ -45,17 +58,7 @@ function createTask(title, dueDate, description, priority, id){
     newToDo.append(left, right)
     return newToDo
 }
-function setPriorityColour(priority, element){
-    let prio = priority.toLowerCase()
-    if(prio === 'high'){
-        element.classList.add('priority-high')
-    }else if(prio === 'medium'){
-        element.classList.add('priority-medium')
-    }else {
-        element.classList.add('priority-low')
-    }
 
-}
 function addNewTaskBtn(){
     const newTask = document.createElement('div')
     newTask.classList.add('new-task')

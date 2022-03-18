@@ -23,6 +23,7 @@
 
                 <label for="priority">Priority</label>
                 <select id='priority' name="priority">
+
                     <option value='High' id='priority' required selected>High</option>
                     <option value="Medium" id='priority' required>Medium</option>
                     <option value='Low' id='priority' required>Low</option>
@@ -30,17 +31,22 @@
                 </select>
                 <label for="category">Category</label>
                 <select id='category' name="category">
-
+                    <option value='none' id='priority' disabled required selected>Select
+                        Option
+                    </option>
 
                 </select>
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                <textarea name="description" id="description" cols="30" rows="10"
+                    placeholder='Your Description'></textarea>
 
 
 
             </form>
             <button class='submit'>Submit</button>
         </div>
+
+
 
     </div>
     <div class="seeDetails">
@@ -51,29 +57,30 @@
         <!-- <button class="save">Save</button> -->
 
         <div class="main">
-            <div class="header">
-                <h1>// TO - DO</h1>
-            </div>
+
             <div class="nav-bar">
                 <div class="home-main">
-                    <h1 data-category='home'>Home</h1>
-                    <h1 data-category='today'>Today</h1>
-                    <h1 data-category='week'>Week</h1>
+                    <button class="addNewProject">Add new Project</button>
+                    <div class="nav-category">
+                        <h1 data-category='home'>Home</h1>
+                        <h1 data-category='today'>Today</h1>
+                        <h1 data-category='week'>Week</h1>
+                    </div>
+
+
+
 
                 </div>
                 <div class="projects">
-                    <h1>Projects</h1>
+
                     <ul class='project-list'>
 
 
 
                     </ul>
-                    <button class="addNewProject">Add new Project</button>
 
                 </div>
-                <div class="notes">
-                    <h1>Notes</h1>
-                </div>
+
 
 
             </div>

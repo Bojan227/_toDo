@@ -1,40 +1,29 @@
-body{
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    
-}
-#content{
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    
-}
 
-.main{
+.home-main{
     display: flex;
-    padding: 15px;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: lightblue
+
 
 }
-.header{
-    width: 100%;
-    background-color: lightcoral;
-    padding: 10px;
-    text-align: center;
+.nav-category{
+    display: flex;
+    gap: 30px;
+    
 }
-.nav-bar{
-    border-right: 2px solid grey;
-    background-color: lightgray;
-    padding: 20px;
+.project-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 0.1fr));
+    gap: 20px;
+    list-style: none;
+    
+}   
+.project-list > li{
+    border: 2px solid black;
+    padding: 50px;
 }
-.main-content{
-    padding: 40px;
-    width: 600px;
-    height: 500px;
-}
+
 .to-do{
     display: flex;
     align-items: center;
@@ -63,26 +52,69 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    position:  fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     text-align: center;
-    background-color: lightblue;
-    padding: 20px;
+    background-image: linear-gradient(lightblue, white);
+    
 }
 .form-content{
-    padding: 35px;
-    border: 2px solid black;
+    padding: 50px;
+    background-image: linear-gradient(white, lightblue);
     border-radius: 10px;
+    width: 25%;
     
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 form>*{
     display: flex;
-   width: 100%;
+    width: 90%;
    margin-bottom: 5px;
    
+   
+   
+}
+label{
+    font-size: 20px;
+}
+input[type='text'], select, textarea, input[type='date']{
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid rgba(10, 180, 180, 1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: rgba(20, 20, 20, .2);
+    color: white;
+    outline: none;
+    width: 100%;
+    
+}
+textarea:focus{
+    border-color: rgba(20, 20, 20, .8);
+    padding: 10px 30px;
+}
+.submit{
+    border: 1px solid rgba(10, 180, 180, 1);
+  background: rgba(20, 20, 20, .6);
+  font-size: 18px;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: .4s;
+}
+.submit:hover{
+    background: rgba(20, 20, 20, .8);
+    padding: 10px 90px;
 }
 .none{
     display: none;

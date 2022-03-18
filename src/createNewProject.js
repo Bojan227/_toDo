@@ -1,15 +1,17 @@
+ import capitalizeFirstLetter from './capitalize';
+
  const createProject = (title, id) => ({
      title,
      id,
  })
  function createNewProject(title, id){
-    let userInput = title.toLowerCase()
+    const userInput = title.toLowerCase()
     const listElement = document.createElement('li');
     const projectName = document.createElement('h3')
     const removeProject = document.createElement('button')
     removeProject.classList.add('removeProject')
     removeProject.textContent = 'X'
-    projectName.textContent =  title
+    projectName.textContent =  capitalizeFirstLetter(title)
     projectName.setAttribute('data-category', userInput)
     listElement.setAttribute('data-id', id)
     listElement.append(projectName, removeProject)
@@ -18,7 +20,7 @@
 function createDropDownOption(title){
     const option = document.createElement('option')
     option.id = 'category'
-    option.textContent = title
+    option.textContent = capitalizeFirstLetter(title)
     option.value = title
     return option
 }

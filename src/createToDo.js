@@ -16,7 +16,7 @@ function getUniqueId(array){
         }else{
             lastUniqueId = arrayOfIds[arrayOfIds.length - 1]
         }
-         lastUniqueId++
+         lastUniqueId += 1
          return lastUniqueId
 }
 
@@ -34,4 +34,4 @@ function createNewTask(arr){
     return newTask
 }
 
-export {createToDo, getUniqueId, createNewTask}
+export {getUniqueId, createNewTask}
