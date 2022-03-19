@@ -1,4 +1,5 @@
  import capitalizeFirstLetter from './capitalize';
+import remove from './icons/close-circle.png';
 
  const createProject = (title, id) => ({
      title,
@@ -8,9 +9,9 @@
     const userInput = title.toLowerCase()
     const listElement = document.createElement('li');
     const projectName = document.createElement('h3')
-    const removeProject = document.createElement('button')
+    const removeProject = document.createElement('img')
     removeProject.classList.add('removeProject')
-    removeProject.textContent = 'X'
+    removeProject.src = remove;
     projectName.textContent =  capitalizeFirstLetter(title)
     projectName.setAttribute('data-category', userInput)
     listElement.setAttribute('data-id', id)

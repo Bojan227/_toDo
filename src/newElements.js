@@ -1,5 +1,7 @@
 import format from 'date-fns/format';
 import capitalizeFirstLetter from './capitalize';
+import trash from './icons/delete.png'
+import add from './icons/plus-circle.png'
 
 function setPriorityColour(priority, element){
     const prio = priority.toLowerCase()
@@ -29,8 +31,8 @@ function createTask(title, dueDate, description, priority, id){
     right.classList.add('right')
 
     const h2 = document.createElement('button');
-    h2.classList.add('details')
-    h2.textContent = "Details"
+    h2.classList.add('detailsBtn')
+    h2.textContent = "Details/Edit"
 
     const desc = document.createElement('h3')
     desc.classList.add('desc')
@@ -42,14 +44,12 @@ function createTask(title, dueDate, description, priority, id){
 
    
     
-    const h5 = document.createElement('button')
-    h5.textContent = 'edit'
-    h5.classList.add('edit')
-    const h6 = document.createElement('h4')
-    h6.classList.add('remove')
-    h6.textContent = 'trash'
+    
+    const h6 = document.createElement('img')
+    h6.classList.add('remove');
+    h6.src = trash;
 
-    right.append(h2, desc, h3, h5, h6)
+    right.append(h2, desc, h3, h6)
     const newToDo = document.createElement('div')
     newToDo.classList.add('to-do')
     setPriorityColour(priority, newToDo)
@@ -60,13 +60,13 @@ function createTask(title, dueDate, description, priority, id){
 }
 
 function addNewTaskBtn(){
-    const newTask = document.createElement('div')
-    newTask.classList.add('new-task')
-    const newTaskBtn = document.createElement('button')
+    
+    const newTaskBtn = document.createElement('img')
     newTaskBtn.classList.add('addNewTask')
-    newTaskBtn.textContent = '+'
-    newTask.appendChild(newTaskBtn)
-    return newTask
+    newTaskBtn.src = add;
+   
+    
+    return newTaskBtn
 }
 function updateDisplayedList(array, content){
     if(array.length === 0){
