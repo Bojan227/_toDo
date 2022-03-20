@@ -27,8 +27,7 @@ module.exports = {
           test: /\.html$/,
           use: [
             {
-              
-              loader: ["html-loader", 'file-loader'],
+              loader: "html-loader",
               options: {minimize: true}
             }
           ]

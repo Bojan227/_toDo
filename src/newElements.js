@@ -61,9 +61,9 @@ function createTask(title, dueDate, description, priority, id){
 
 function addNewTaskBtn(){
     
-    const newTaskBtn = document.createElement('img')
+    const newTaskBtn = document.createElement('button')
     newTaskBtn.classList.add('addNewTask')
-    newTaskBtn.src = add;
+    newTaskBtn.textContent = 'Add New Task';
    
     
     return newTaskBtn

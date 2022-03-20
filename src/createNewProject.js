@@ -1,5 +1,6 @@
- import capitalizeFirstLetter from './capitalize';
+import capitalizeFirstLetter from './capitalize';
 import remove from './icons/close-circle.png';
+import addPlus from './icons/plus-circle.png';
 
  const createProject = (title, id) => ({
      title,
@@ -35,9 +36,11 @@ function updateDisplayedProjects(array, content, dropdown){
         
         array.map(project => {
             content.appendChild(createNewProject(project.title, project.id))
+           
             dropdown.appendChild(createDropDownOption(project.title))
         })
     }
+    
     
     
 }

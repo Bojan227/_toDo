@@ -94,6 +94,24 @@ const taskManager = (() => {
     a.style.textDecoration = style1;
     
   }
+  function domManipulation(a, b){
+    const navCategory = document.querySelector('.nav-category').children
+    
+    for(let i = 0; i<navCategory.length; i+=1){
+      navCategory[i].classList.remove('active')
+    }
+    
+    if(a === 'home'){
+      
+      b.classList.add('active')
+    }else if(a === format(new Date(), 'MM/dd/yyyy')){
+      b.classList.add('active')
+    }else if(a === 'week'){
+      b.classList.add('active')
+    }
+
+
+  }
 
   function filterTasks(arr) {
     const result = arr.filter((task) => {
@@ -116,10 +134,10 @@ const taskManager = (() => {
   }
 
   navBar.addEventListener('click', (e) => {
+    category = e.target.dataset.category;
     if (!e.target.dataset.category) { return; }
     if (category === undefined) { return; }
-    category = e.target.dataset.category;
-    console.log(category);
+    domManipulation(category, e.target)
     updateDisplayedList(filterTasks(myToDo, category), mainContent);
   });
 
@@ -171,14 +189,15 @@ const taskManager = (() => {
   })
   
 
-  return { getIndex };
+  return { getIndex};
 })();
 
 const projectManager = (() => {
   // global variables
   const projectList = document.querySelector('.project-list');
+
   const categoryDropDown = document.querySelector("select[name = 'category']");
-  const addNewProjectBtn = document.querySelector('.addNewProject');
+ const addNewProjectBtn = document.querySelector('.add-project')
   let myProjectsArray = [
     {
       title: 'gym',
@@ -200,19 +219,37 @@ const projectManager = (() => {
   addNewProjectBtn.addEventListener('click', () => {
     projectList.innerHTML = '';
     categoryDropDown.innerHTML = '';
-    const newProject = createProject('cook', getUniqueId(myProjectsArray));
+    const newProjectInput = document.getElementById('new-project')
+    const newProject = createProject(newProjectInput.value, getUniqueId(myProjectsArray));
     myProjectsArray.push(newProject);
     saveToStorage('myProject', myProjectsArray);
     updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown);
   });
+  
+  function projectManipulation(target){
+    console.log(projectList.children)
+    for(let i = 0; i < projectList.children.length; i+=1){
+      
+      projectList.children[i].classList.remove('active')
+    }
+    if(target === undefined){return}
+    if(target === projectList){return}
+    if(target.children.length === 0){
+      target.parentElement.classList.add('active')
+      return
+    }
+    target.classList.add('active')
+  }
   projectList.addEventListener('click', (e) => {
+   
     const elementId = e.target.parentElement.dataset.id;
-
+    projectManipulation(e.target)
     if (e.target.className === 'removeProject') {
       myProjectsArray.splice(taskManager.getIndex(myProjectsArray, elementId), 1);
       saveToStorage('myProject', myProjectsArray);
       projectList.innerHTML = '';
       categoryDropDown.innerHTML = '';
+     
       updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown);
     }
   });
