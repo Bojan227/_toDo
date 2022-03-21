@@ -94,7 +94,7 @@ const taskManager = (() => {
     a.style.textDecoration = style1;
     
   }
-  function domManipulation(a, b){
+  function changingActiveClass(a, b){
     const navCategory = document.querySelector('.nav-category').children
     
     for(let i = 0; i<navCategory.length; i+=1){
@@ -109,8 +109,6 @@ const taskManager = (() => {
     }else if(a === 'week'){
       b.classList.add('active')
     }
-
-
   }
 
   function filterTasks(arr) {
@@ -137,7 +135,7 @@ const taskManager = (() => {
     category = e.target.dataset.category;
     if (!e.target.dataset.category) { return; }
     if (category === undefined) { return; }
-    domManipulation(category, e.target)
+    changingActiveClass(category, e.target)
     updateDisplayedList(filterTasks(myToDo, category), mainContent);
   });
 
@@ -222,6 +220,7 @@ const projectManager = (() => {
     const newProjectInput = document.getElementById('new-project')
     const newProject = createProject(newProjectInput.value, getUniqueId(myProjectsArray));
     myProjectsArray.push(newProject);
+    newProjectInput.value = ''
     saveToStorage('myProject', myProjectsArray);
     updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown);
   });

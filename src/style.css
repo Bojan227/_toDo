@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300;1,500&display=swap');
+
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+    font-family: 'Roboto', sans-serif;
 }
 #content{
     background-color: #a5f3fc;
     min-height: 100vh;
+    
 }
 .home-main{
     display: flex;
@@ -16,7 +20,9 @@
     padding: 20px;
 
 
+
 }
+
 #main-content{
     display: flex;
     justify-content: center;
@@ -33,9 +39,7 @@
     width: 60%;
     height: 600px;
     gap: 20px;
-    padding: 10px;
-    
-    
+    padding: 10px;    
     
 }
 
@@ -54,11 +58,12 @@
 }
 .addNewTask{
     width: 20%;
-    
+    margin-top: 20px;
     padding: 10px;
     cursor: pointer;
     border-radius: 10px;
     background-image: linear-gradient( #74ebd5, #acb6e5);
+    width: 40%;
 }
 .nav-category{
     display: flex;
@@ -67,7 +72,12 @@
     justify-content: center;
     gap: 30px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
     
+}
+.projects{
+    padding: 10px;
 }
 .project-list{
     display: grid;
@@ -88,6 +98,12 @@
     position: relative;
     align-items: center;
     justify-content: center
+}
+.newTaskHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 .removeProject{
     position: absolute;
@@ -138,10 +154,10 @@
     
 }
 .form-content{
-    padding: 50px;
+    padding: 40px;
     background-image: linear-gradient(white, lightblue);
     border-radius: 10px;
-    width: 25%;
+   
     
 }
 img{
@@ -213,6 +229,7 @@ textarea:focus{
     bottom: 0;
     text-align: center;
     z-index: 1000;
+    padding: 10px;
 
 }
 
@@ -222,8 +239,7 @@ textarea:focus{
     gap: 20px;
     border-radius: 10px;
     padding: 30px;
-    width: 550px;
-    height: 500px;
+    border: hsla(black, 0, 0, 0.2);
     background-image: linear-gradient(#a5f3fc, #e0f2fe);
     
 }
@@ -278,25 +294,50 @@ textarea:focus{
         flex-direction: column;
     }
     .projects{
-        display: grid;
-        grid-auto-flow: row;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
         padding: 20px;
         
     }
     .project-list{
         border: 2px solid lavenderblush;
-        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-        gap: 80px;
+        justify-content: center;
+        gap: 20px;
         justify-self: center;
+        overflow: scroll;
+        height: 550px;
     }
    .main-content{
        width: 100%;
+      
        gap: 5px;
+       
+       overflow-x: hidden;
+       
        
    }
    .main-content>div{
+       max-width: 100%;
        padding: 10px;
    }
+  
+   .form-container{
+       padding: 10px;
+   }
+   .form-content{
+    height: 80%;
+    
+    display: flex;
+    flex-direction: column;
+   }
+   .dateNTitle{
+       display: flex;
+       flex-direction: column;
+   }
+
 }
 .none{
     display: none;
