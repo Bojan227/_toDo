@@ -224,7 +224,10 @@ const projectManager = (() => {
       newProjectInput.style.border = '2px solid red'
       return
     }
+
       newProjectInput.style.border = '0'
+ 
+      
     
     projectList.innerHTML = '';
     categoryDropDown.innerHTML = '';
