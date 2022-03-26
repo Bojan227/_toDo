@@ -300,6 +300,7 @@ textarea:focus{
 li>h3{
     font-size: 28px;
 }
+
 @media  screen and (max-width: 50em) {
     .home-main{
         display: flex;
