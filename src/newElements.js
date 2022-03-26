@@ -1,7 +1,7 @@
 import format from 'date-fns/format';
 import capitalizeFirstLetter from './capitalize';
 import trash from './icons/delete.png'
-import add from './icons/plus-circle.png'
+
 
 function setPriorityColour(priority, element){
     const prio = priority.toLowerCase()
@@ -40,8 +40,8 @@ function createTask(title, dueDate, description, priority, id){
     
     const h3 = document.createElement('h3');
     h3.classList.add('dueDate')
+    console.log(dueDate)
     h3.textContent = format(new Date(dueDate), "d MMM");
-
    
     
     
