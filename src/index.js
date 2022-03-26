@@ -16,12 +16,13 @@ const taskManager = (() => {
   const submitTaskBtn = document.querySelector('.submit');
   const newTaskForm = document.querySelector('.form-container');
   const removeBtn = document.querySelector('.goBackBtn')
+  const closeAddNewTask = document.querySelector('.closeCard')
   const confirmEditBtn = document.querySelector('.confirmEdit')
  
   let category = 'home';
   let elementId;
 
-  let myToDo = [
+  const myToDo = getFromStorage('myTask') || [
     {
       category: 'Work',
       title: 'Make app',
@@ -72,7 +73,8 @@ const taskManager = (() => {
     },
 
   ];
-  myToDo = getFromStorage('myTask');
+   
+ 
   updateDisplayedList(myToDo, mainContent);
 
   function setTodaysDate() {
@@ -143,7 +145,7 @@ const taskManager = (() => {
     elementId = e.target.parentElement.parentElement.dataset.id;
     if (e.target.className === 'remove') {
       myToDo.splice(getIndex(myToDo, elementId), 1);
-      // saveToStorage('myTask', myToDo)
+      saveToStorage('myTask', myToDo)
       updateDisplayedList(filterTasks(myToDo, category), mainContent);
     } else if (e.target.className === 'addNewTask') {
       newTaskForm.classList.remove('none');
@@ -165,7 +167,7 @@ const taskManager = (() => {
   });
   submitTaskBtn.addEventListener('click', () => {
     myToDo.push(createNewTask(myToDo));
-    // saveToStorage('myTask', myToDo)
+    saveToStorage('myTask', myToDo)
     updateDisplayedList(filterTasks(myToDo, category), mainContent);
     newTaskForm.classList.add('none');
   });
@@ -178,14 +180,16 @@ const taskManager = (() => {
     const priorityInput = selectPriority.value
     const descriptionEdit = document.querySelector('.descCont')
     editTask(titleEdit.value, dateEdit.value, priorityInput, descriptionEdit.value);
-    // saveToStorage('myTask', myToDo)
+    saveToStorage('myTask', myToDo)
     updateDisplayedList(filterTasks(myToDo, category), mainContent);
   })
   removeBtn.addEventListener('click', ()=>{
     const seeDetailsContent = document.querySelector('.seeDetails')
     seeDetailsContent.classList.add('none')
   })
-  
+  closeAddNewTask.addEventListener('click', ()=>{
+    newTaskForm.classList.add('none')
+  })
 
   return { getIndex};
 })();
@@ -193,10 +197,9 @@ const taskManager = (() => {
 const projectManager = (() => {
   // global variables
   const projectList = document.querySelector('.project-list');
-
   const categoryDropDown = document.querySelector("select[name = 'category']");
- const addNewProjectBtn = document.querySelector('.add-project')
-  let myProjectsArray = [
+  const addNewProjectBtn = document.querySelector('.add-project')
+  const myProjectsArray =  getFromStorage('myProject') || [
     {
       title: 'gym',
       id: 0,
@@ -211,13 +214,21 @@ const projectManager = (() => {
     },
 
   ];
-  myProjectsArray = getFromStorage('myProject');
+ 
   updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown);
 
-  addNewProjectBtn.addEventListener('click', () => {
+  addNewProjectBtn.addEventListener('click', (e) => {
+    const newProjectInput = document.getElementById('new-project')
+    // New Project Validation
+    if(newProjectInput.value === ''){
+      newProjectInput.style.border = '2px solid red'
+      return
+    }
+      newProjectInput.style.border = '0'
+    
     projectList.innerHTML = '';
     categoryDropDown.innerHTML = '';
-    const newProjectInput = document.getElementById('new-project')
+    
     const newProject = createProject(newProjectInput.value, getUniqueId(myProjectsArray));
     myProjectsArray.push(newProject);
     newProjectInput.value = ''
@@ -251,5 +262,9 @@ const projectManager = (() => {
      
       updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown);
     }
+
+    // Add new project validation
+
   });
 })();
+

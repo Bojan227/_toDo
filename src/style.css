@@ -104,7 +104,21 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+
 }
+.newTaskHeader>h1{
+    cursor: pointer;
+}
+.form-content{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-image: linear-gradient(white, lightblue);
+    border-radius: 10px;
+    width: 30%;
+    border: 2px solid black;
+    
+   }
 .removeProject{
     position: absolute;
     top: 2px;
@@ -153,13 +167,7 @@
     z-index: 9999;
     
 }
-.form-content{
-    padding: 40px;
-    background-image: linear-gradient(white, lightblue);
-    border-radius: 10px;
-   
-    
-}
+
 img{
     cursor: pointer;
 }
@@ -213,8 +221,10 @@ textarea:focus{
 }
 
 .newTaskTitle{
-    color: blue;
+    color: black;
 }
+
+
 
 .seeDetails{
 
@@ -239,13 +249,16 @@ textarea:focus{
     gap: 20px;
     border-radius: 10px;
     padding: 30px;
-    border: hsla(black, 0, 0, 0.2);
+    border:2px solid black;
     background-image: linear-gradient(#a5f3fc, #e0f2fe);
     
 }
 .details > p{
     
    padding: 20px;
+}
+.details>h3{
+    cursor: pointer;
 }
 .goBackBtn {
     text-align: right;
@@ -284,7 +297,10 @@ textarea:focus{
     
     cursor: pointer;
 }
-@media  screen and (max-width: 35em) {
+li>h3{
+    font-size: 28px;
+}
+@media  screen and (max-width: 50em) {
     .home-main{
         display: flex;
         flex-direction: column;
@@ -328,13 +344,17 @@ textarea:focus{
        padding: 10px;
    }
    .form-content{
-    height: 80%;
-    
-    display: flex;
-    flex-direction: column;
+       width: 70%;
+       padding: 20px;
+       
    }
    .dateNTitle{
        display: flex;
+       flex-direction: column;
+   }
+  
+   
+   .right{
        flex-direction: column;
    }
 
