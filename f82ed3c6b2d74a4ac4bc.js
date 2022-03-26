@@ -266,7 +266,7 @@ const projectManager = (() => {
       updateDisplayedProjects(myProjectsArray, projectList, categoryDropDown);
     }
 
-    // Add new project validation
+   
 
   });
 })();
