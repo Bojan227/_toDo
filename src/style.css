@@ -348,6 +348,10 @@ li>h3{
    }
    .form-content{
        width: 100%;
+       overflow-y: scroll;
+   }
+   .details{
+       overflow-y: scroll;
    }
 
    .title-date{
