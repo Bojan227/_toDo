@@ -116,6 +116,7 @@
     background-image: linear-gradient(white, lightblue);
     border-radius: 10px;
     width: 30%;
+   
     border: 2px solid black;
     
    }
@@ -343,11 +344,16 @@ li>h3{
   
    .form-container{
        padding: 10px;
+      
    }
    .form-content{
-       width: 70%;
-       padding: 20px;
-       
+       width: 100%;
+   }
+
+   .title-date{
+       display: flex;
+       flex-direction: column;
+       gap: 5px;
    }
    .dateNTitle{
        display: flex;
