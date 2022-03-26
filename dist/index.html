@@ -1,1 +1,79 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>Document</title> <script defer src="main.js"></script></head> <body> <div class="form-container none"> <div class="form-content"> <div class="newTaskHeader"> <h1 class="newTaskTitle">New Task</h1> <h1 class="closeCard">X</h1> </div> <form> <label for="title">Task name:</label> <input type="text" id="title" name="task_name" required> <label for="dueDate">Due date:</label> <input type="date" id="dueDate" name="due_date" required> <label for="priority">Priority</label> <select id="priority" name="priority"> <option value="High" id="priority" required selected="selected">High</option> <option value="Medium" id="priority" required>Medium</option> <option value="Low" id="priority" required>Low</option> </select> <label for="category">Category</label> <select id="category" name="category"> <option value="none" id="priority" disabled="disabled" required selected="selected">Select Option </option> </select> <label for="description">Description</label> <textarea name="description" id="description" cols="30" rows="10" placeholder="Your Description"></textarea> </form> <button class="submit">Submit</button> </div> </div> <div class="seeDetails none"> <div class="details"> <h3 class="goBackBtn">X</h3> <div class="editTasks"> <div class="dateNTitle"> <div class="titleEdit"> <label for="titleDesc">Title</label> <input type="text" id="titleDesc" class="titleDesc"> </div> <div class="dateEdit"> <label for="dateDesc">Due Date</label> <input type="date" id="dateDesc" class="dateDesc"> </div> </div> <div class="priorityEdit"> <label for="priority">Priority</label> <select id="priority" name="priority"> <option value="High" id="priority" required selected="selected"><button>High</button></option> <option value="Medium" id="priority" required>Medium</option> <option value="Low" id="priority" required>Low</option> </select> </div> <div class="descriptionEdit"> <label for="description">Description</label> <textarea name="description" id="description" class="descCont" cols="30" rows="10" placeholder="Your Description"></textarea> </div> </div> <button class="confirmEdit">Confirm Edit</button> </div> </div> <div id="content"> <div class="main"> <div class="nav-bar"> <div class="home-main"> <div class="homebar"> <span><input type="text" id="new-project" placeholder="Add New Project" required></span> <button class="add-project" type="submit">ADD</button> </div> <div class="nav-category"> <h1 data-category="home" class="active">Home</h1> <h1 data-category="today">Today</h1> <h1 data-category="week">Week</h1> </div> </div> <div class="projects"> <h1>Projects</h1> <ul class="project-list"> </ul> </div> </div> <div id="main-content"> <div class="main-content"> </div> </div> </div> </div>  <script src="233463d1143eeaf005e6.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>To-Do App</title>
+    <script defer src="main.js"></script>
+</head>
+
+<body>
+    <div class="form-container none">
+        <div class="form-content">
+            <div class="newTaskHeader">
+                <h1 class="newTaskTitle">New Task</h1>
+                <h1 class="closeCard">X</h1>
+            </div>
+            <form> <label for="title">Task name:</label> <input type="text" id="title" name="task_name" required> <label
+                    for="dueDate">Due date:</label> <input type="date" id="dueDate" name="due_date" required> <label
+                    for="priority">Priority</label> <select id="priority" name="priority">
+                    <option value="High" id="priority" required selected="selected">High</option>
+                    <option value="Medium" id="priority" required>Medium</option>
+                    <option value="Low" id="priority" required>Low</option>
+                </select> <label for="category">Category</label> <select id="category" name="category">
+                    <option value="none" id="priority" disabled="disabled" required selected="selected">Select Option
+                    </option>
+                </select> <label for="description">Description</label> <textarea name="description" id="description"
+                    cols="30" rows="10" placeholder="Your Description"></textarea> </form> <button
+                class="submit">Submit</button>
+        </div>
+    </div>
+    <div class="seeDetails none">
+        <div class="details">
+            <h3 class="goBackBtn">X</h3>
+            <div class="editTasks">
+                <div class="dateNTitle">
+                    <div class="titleEdit"> <label for="titleDesc">Title</label> <input type="text" id="titleDesc"
+                            class="titleDesc"> </div>
+                    <div class="dateEdit"> <label for="dateDesc">Due Date</label> <input type="date" id="dateDesc"
+                            class="dateDesc"> </div>
+                </div>
+                <div class="priorityEdit"> <label for="priority">Priority</label> <select id="priority" name="priority">
+                        <option value="High" id="priority" required selected="selected"><button>High</button></option>
+                        <option value="Medium" id="priority" required>Medium</option>
+                        <option value="Low" id="priority" required>Low</option>
+                    </select> </div>
+                <div class="descriptionEdit"> <label for="description">Description</label> <textarea name="description"
+                        id="description" class="descCont" cols="30" rows="10" placeholder="Your Description"></textarea>
+                </div>
+            </div> <button class="confirmEdit">Confirm Edit</button>
+        </div>
+    </div>
+    <div id="content">
+        <div class="main">
+            <div class="nav-bar">
+                <div class="home-main">
+                    <div class="homebar"> <span><input type="text" id="new-project" placeholder="Add New Project"
+                                required></span> <button class="add-project" type="submit">ADD</button> </div>
+                    <div class="nav-category">
+                        <h1 data-category="home" class="active">Home</h1>
+                        <h1 data-category="today">Today</h1>
+                        <h1 data-category="week">Week</h1>
+                    </div>
+                </div>
+                <div class="projects">
+                    <h1>Projects</h1>
+                    <ul class="project-list"> </ul>
+                </div>
+            </div>
+            <div id="main-content">
+                <div class="main-content"> </div>
+            </div>
+        </div>
+    </div>
+    <script src="233463d1143eeaf005e6.js"></script>
+</body>
+
+</html>
